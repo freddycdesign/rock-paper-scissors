@@ -10,7 +10,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return ("It's a draw! Try again");
+        return alert("Computer also picks " + computerSelection + ". It's a draw, try again!") + prompt();
     } else if (
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "paper") ||
@@ -25,8 +25,11 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "paper" && computerSelection === "scissors")
     ) {
         return ("Sorry you lost this round!");
-    }
+    } else
+        alert("I don't know what you're playing, please try again");
+    return prompt();
 }
+
 const playerSelection = prompt();
 const computerSelection = getComputerChoice();
 console.log("You pick " + playerSelection + ", computer picks " + computerSelection + ", " + playRound(playerSelection, computerSelection));
