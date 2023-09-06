@@ -1,6 +1,5 @@
-//Prompt user to input rock paper or scissors
-//computer randomly selects rock, paper, or scissors in return,
-//if it's a draw, announce draw and prompt user to input again,
+let playerWins = 0;
+let computerWins = 0;
 
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
@@ -10,26 +9,25 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return alert("Computer also picks " + computerSelection + ". It's a draw, try again!") + prompt();
+        alert("It's a draw!");
     } else if (
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "rock")
     ) {
-        return ("You won this round!");
-    }
-
-    else if (
+        playerWins++;
+        alert("You won this round!");
+    } else if (
         (playerSelection === "rock" && computerSelection === "paper") ||
         (playerSelection === "scissors" && computerSelection === "rock") ||
         (playerSelection === "paper" && computerSelection === "scissors")
     ) {
-        return ("Sorry you lost this round!");
-    } else
-        alert("I don't know what you're playing, please try again");
-    return prompt();
+        computerWins++;
+        alert("Sorry you lost this round!");
+    }
 }
 
-const playerSelection = prompt();
+const playerSelection = prompt("Start the game").toLowerCase();
 const computerSelection = getComputerChoice();
-console.log("You pick " + playerSelection + ", computer picks " + computerSelection + ", " + playRound(playerSelection, computerSelection));
+playRound(playerSelection, computerSelection);
+console.log("Your Score: " + playerWins + " | Computer Score: " + computerWins);
