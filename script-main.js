@@ -31,3 +31,16 @@ const playerSelection = prompt("Start the game").toLowerCase();
 const computerSelection = getComputerChoice();
 playRound(playerSelection, computerSelection);
 console.log("Your Score: " + playerWins + " | Computer Score: " + computerWins);
+
+while (playerWins < 5 && computerWins < 5) {
+    const playerSelection = prompt("Enter rock, paper, or scissors:").toLowerCase();
+    const computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+    console.log("Player: " + playerWins + " | Computer: " + computerWins);
+}
+
+if (playerWins === 5) {
+    alert("Congratulations! You won 5 games.");
+} else if (computerWins === 5) {
+    alert("Computer won 5 games. Better luck next time.");
+}
