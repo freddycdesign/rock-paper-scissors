@@ -27,11 +27,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = prompt("Start the game").toLowerCase();
-const computerSelection = getComputerChoice();
-playRound(playerSelection, computerSelection);
-console.log("Your Score: " + playerWins + " | Computer Score: " + computerWins);
-
 while (playerWins < 5 && computerWins < 5) {
     const playerSelection = prompt("Enter rock, paper, or scissors:").toLowerCase();
     const computerSelection = getComputerChoice();
