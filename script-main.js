@@ -1,53 +1,70 @@
 let playerWins = 0;
 let computerWins = 0;
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+rock.addEventListener('click', () => playRound('rock'));
+paper.addEventListener('click', () => playRound('paper'));
+scissors.addEventListener('click', () => playRound('scissors'));
 
 function getComputerChoice() {
-    const choices = ["rock", "paper", "scissors"];
+    const choices = ['rock', 'paper', 'scissors'];
     const random = Math.floor(Math.random() * choices.length);
     return choices[random];
 }
 
-function playRound(playerSelection, computerSelection) {
+const div = document.querySelector('div');
+const h4 = document.querySelector('h4');
+h4.textContent = "Player wins: " + playerWins + " - Computer wins: " + computerWins;
+
+function playRound(playerSelection) {
+    const p = document.querySelector('p');
+    p.textContent = " ";
+    const computerSelection = getComputerChoice();
+    console.log('You picked ' + playerSelection + ', computer picked ' + computerSelection);
     if (playerSelection === computerSelection) {
-        alert("It's a draw!");
+        p.textContent = "It's a draw!";
     } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "scissors" && computerSelection === "paper") ||
-        (playerSelection === "paper" && computerSelection === "rock")
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper') ||
+        (playerSelection === 'paper' && computerSelection === 'rock')
     ) {
         playerWins++;
-        alert("You won this round!");
+        p.textContent = "You won this round!";
     } else if (
-        (playerSelection === "rock" && computerSelection === "paper") ||
-        (playerSelection === "scissors" && computerSelection === "rock") ||
-        (playerSelection === "paper" && computerSelection === "scissors")
+        (playerSelection === 'rock' && computerSelection === 'paper') ||
+        (playerSelection === 'scissors' && computerSelection === 'rock') ||
+        (playerSelection === 'paper' && computerSelection === 'scissors')
     ) {
         computerWins++;
-        alert("Sorry you lost this round!");
+        p.textContent = "Sorry you lost this round!";
     }
-}
-
-function startNewGame() {
-    playerWins = 0;
-    computerWins = 0;
-
-    console.log("Player: " + playerWins + " | Computer: " + computerWins);
-
-    while (playerWins < 5 && computerWins < 5) {
-        const playerSelection = prompt("Enter rock, paper, or scissors:").toLowerCase();
-        const computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-        console.log("Player: " + playerWins + " | Computer: " + computerWins);
-    }
-
+    const button = document.createElement('button');
+    h4.textContent = "Player wins: " + playerWins + " - Computer wins: " + computerWins;
     if (playerWins === 5) {
-        alert("Congratulations! You won 5 games.");
-    } else if (computerWins === 5) {
-        alert("Computer won 5 games. Better luck next time.");
+        button.textContent = "Reset";
+        div.appendChild(button);
+        console.log("Player wins!");
+        p.textContent = "Player won the game!";
+        playerWins = 0;
+        computerWins = 0;
+        button.addEventListener('click', () => {
+            playRound();
+            div.removeChild(button);
+        });
     }
-
-    alert("New Game starting, good luck!");
-    startNewGame();
+    if (computerWins === 5) {
+        button.textContent = "Reset";
+        div.appendChild(button);
+        console.log("Computer wins!");
+        p.textContent = "Computer won the game!";
+        playerWins = 0;
+        computerWins = 0;
+        computerWins = 0;
+        button.addEventListener('click', () => {
+            playRound();
+            div.removeChild(button);
+        });
+    }
 }
-
-startNewGame();
